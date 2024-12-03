@@ -1,9 +1,13 @@
 package tba
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/ropon/requests/v2"
 	"net/url"
+	"reflect"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -23,6 +27,7 @@ type Client struct {
 
 	User       *UserService
 	Advertiser *AdvertiserService
+	Campaign   *CampaignService
 }
 
 type service struct {
@@ -44,6 +49,7 @@ func NewClient(httpReq *requests.Request) *Client {
 
 	c.User = (*UserService)(&c.common)
 	c.Advertiser = (*AdvertiserService)(&c.common)
+	c.Campaign = (*CampaignService)(&c.common)
 	return c
 }
 
@@ -71,7 +77,7 @@ func (c *Client) rawJson(res *requests.Response, resp interface{}) error {
 }
 
 func (c *Client) get(url string, resp interface{}, query ...interface{}) error {
-	res, err := c.client.Get(url, query)
+	res, err := c.client.Get(url, query...)
 	if err != nil {
 		return err
 	}
@@ -79,9 +85,76 @@ func (c *Client) get(url string, resp interface{}, query ...interface{}) error {
 }
 
 func (c *Client) post(url string, resp interface{}, data ...interface{}) error {
-	res, err := c.client.Post(url, data)
+	res, err := c.client.Post(url, data...)
 	if err != nil {
 		return err
 	}
 	return c.rawJson(res, resp)
+}
+
+func structPtr2Map(obj interface{}, tagName string) map[string]interface{} {
+	v := reflect.ValueOf(obj)
+	if v.Kind() == reflect.Ptr {
+		v = v.Elem()
+	}
+	if v.Kind() != reflect.Struct {
+		return nil
+	}
+	t := v.Type()
+	data := make(map[string]interface{})
+	for i := 0; i < v.NumField(); i++ {
+		field := t.Field(i)
+		value := v.Field(i)
+		tag := field.Tag.Get(tagName)
+		if tag == "-" {
+			continue // 忽略标记为 "-" 的字段
+		}
+		tagParts := strings.Split(tag, ",")
+		if len(tagParts) == 0 {
+			continue
+		}
+		key := tagParts[0]
+		if key == "" {
+			continue
+		}
+
+		var fieldValue interface{}
+		if value.Kind() == reflect.Ptr && !value.IsNil() {
+			fieldValue = structPtr2Map(value.Interface(), tagName)
+		} else if value.Kind() == reflect.Struct {
+			fieldValue = structPtr2Map(value.Interface(), tagName)
+		} else if value.Kind() == reflect.Slice && value.Type().Elem().Kind() == reflect.String {
+			// 使用 json.Marshal 处理 []string
+			bS, err := json.Marshal(value.Interface())
+			if err == nil {
+				fieldValue = string(bS)
+			}
+		} else {
+			fieldValue = value.Interface()
+		}
+
+		if !value.IsZero() {
+			data[key] = fieldValue
+		} else {
+			// 检查是否有默认值
+			for _, part := range tagParts[1:] {
+				if strings.HasPrefix(part, "default=") {
+					defaultValue := strings.TrimPrefix(part, "default=")
+					switch value.Kind() {
+					case reflect.Int, reflect.Int64:
+						if intValue, err := strconv.ParseInt(defaultValue, 10, 64); err == nil {
+							data[key] = intValue
+						}
+					case reflect.String:
+						data[key] = defaultValue
+						// 可以根据需要添加其他类型的处理
+					default:
+						panic("unhandled default case")
+					}
+					break
+				}
+			}
+		}
+	}
+	return data
 }

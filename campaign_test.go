@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestGetAdvertiserInfo(t *testing.T) {
+func TestFindCampaigns(t *testing.T) {
 	t.Parallel()
 
 	tokenCfg := NewTokenConfig(os.Getenv("TikTokAppID"), os.Getenv("TikTokSecret"))
@@ -16,12 +16,13 @@ func TestGetAdvertiserInfo(t *testing.T) {
 		return
 	}
 	c := NewClient(req)
-	resp, err := c.Advertiser.GetAdvertiserInfo(&AdvertiserReq{
-		AdvertiserIDS: []string{""},
+	c.SetHTTPDebug(true)
+	resp, err := c.Campaign.FindCampaigns(&CampaignListReq{
+		AdvertiserID: "",
 	})
 	if err != nil {
 		t.Error(err.Error())
 		return
 	}
-	t.Log(resp.Data)
+	t.Log(resp.List)
 }

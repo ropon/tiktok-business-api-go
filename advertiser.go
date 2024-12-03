@@ -1,8 +1,6 @@
 package tba
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/ropon/requests/v2"
 )
 
@@ -72,18 +70,9 @@ func (s *AdvertiserService) GetAdvertisers(query *AdvertisersReq) (*AdvertisersR
 }
 
 func (s *AdvertiserService) GetAdvertiserInfo(query *AdvertiserReq) (*AdvertiserResp, error) {
-	if len(query.AdvertiserIDS) == 0 {
-		return nil, fmt.Errorf("AdvertiserIDS不能位空")
-	}
-	bS, _ := json.Marshal(query.AdvertiserIDS)
-	apiUrl := fmt.Sprintf("advertiser/info/?advertiser_ids=%s", string(bS))
-	if len(query.Fields) > 0 {
-		bS, _ = json.Marshal(query.Fields)
-		apiUrl = fmt.Sprintf("%s&fields=%s", apiUrl, string(bS))
-	}
-
+	apiUrl := "advertiser/info/"
 	resp := new(AdvertiserResp)
-	err := s.client.get(apiUrl, resp)
+	err := s.client.get(apiUrl, resp, structPtr2Map(query, "json"))
 	if err != nil {
 		return nil, err
 	}
