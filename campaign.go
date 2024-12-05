@@ -137,7 +137,7 @@ type Campaign struct {
 	AppID                       string                      `json:"app_id,omitempty"`                          // 推广的App的ID
 	Budget                      float64                     `json:"budget,omitempty"`                          // 推广系列预算
 	BudgetMode                  BudgetMode                  `json:"budget_mode,omitempty"`                     // 预算类型
-	RtaID                       string                      `json:"rta_id,omitempty"`                          // 实时 API ID
+	RtaID                       *string                     `json:"rta_id,omitempty"`                          // 实时 API ID
 	RtaProductSelectionEnabled  bool                        `json:"rta_product_selection_enabled,omitempty"`   // 是否使用实时 API 自动选择商品
 	SecondaryStatus             string                      `json:"secondary_status,omitempty"`                // 推广系列状态（二级状态）
 	OperationStatus             OperationStatus             `json:"operation_status,omitempty"`                // 推广系列的操作状态
@@ -147,7 +147,7 @@ type Campaign struct {
 	CampaignProductSource       CampaignProductSource       `json:"campaign_product_source,omitempty"`         // 推广系列的商品来源
 	BudgetOptimizeOn            bool                        `json:"budget_optimize_on,omitempty"`              // 是否开启推广系列预算优化
 	BidType                     string                      `json:"bid_type,omitempty"`                        // 推广系列层级的竞价策略
-	DeepBidType                 string                      `json:"deep_bid_type,omitempty"`                   // 深度事件出价类型
+	DeepBidType                 *string                     `json:"deep_bid_type,omitempty"`                   // 深度事件出价类型
 	RoasBid                     float64                     `json:"roas_bid,omitempty"`                        // 用于价值优化的ROAS目标值
 	OptimizationGoal            string                      `json:"optimization_goal,omitempty"`               // 优化目标
 	IsNewStructure              bool                        `json:"is_new_structure,omitempty"`                // 是否为新结构

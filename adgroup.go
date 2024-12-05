@@ -33,7 +33,7 @@ type AdGroup struct {
 	AppID                                        string             `json:"app_id"`                                            // 推广的App的ID
 	AppType                                      string             `json:"app_type"`                                          // 推广的App的类型
 	AppDownloadURL                               string             `json:"app_download_url"`                                  // App下载链接
-	PixelID                                      string             `json:"pixel_id"`                                          // Pixel ID
+	PixelID                                      *string            `json:"pixel_id"`                                          // Pixel ID
 	OptimizationEvent                            string             `json:"optimization_event"`                                // 广告组转化事件
 	PlacementType                                string             `json:"placement_type"`                                    // 版位类型
 	Placements                                   []string           `json:"placements"`                                        // 投放版位
@@ -82,7 +82,7 @@ type AdGroup struct {
 	SavedAudienceID                              string             `json:"saved_audience_id"`                                 // 已保存受众ID
 	ContextualTagIDs                             []string           `json:"contextual_tag_ids"`                                // 内容相关定向标签ID列表
 	BrandSafetyType                              string             `json:"brand_safety_type"`                                 // 品牌安全类型
-	BrandSafetyPartner                           string             `json:"brand_safety_partner"`                              // 品牌安全合作伙伴
+	BrandSafetyPartner                           *string            `json:"brand_safety_partner"`                              // 品牌安全合作伙伴
 	InventoryFilterEnabled                       bool               `json:"inventory_filter_enabled"`                          // 库存筛选
 	CategoryExclusionIDs                         []string           `json:"category_exclusion_ids"`                            // 内容排除类别ID
 	VerticalSensitivityID                        string             `json:"vertical_sensitivity_id"`                           // 行业敏感内容控制类型ID
@@ -100,23 +100,23 @@ type AdGroup struct {
 	DiscountAmount                               float64            `json:"discount_amount"`                                   // 预算折扣的固定金额
 	DiscountPercentage                           float64            `json:"discount_percentage"`                               // 预算折扣的百分比
 	PreDiscountBudget                            float64            `json:"pre_discount_budget"`                               // 预估折前预算
-	ScheduleInfos                                []ScheduleInfo     `json:"schedule_infos"`                                    // 覆盖和频次广告组的广告投放信息
+	ScheduleInfos                                *[]ScheduleInfo    `json:"schedule_infos"`                                    // 覆盖和频次广告组的广告投放信息
 	Dayparting                                   string             `json:"dayparting"`                                        // 广告投放安排
 	OptimizationGoal                             string             `json:"optimization_goal"`                                 // 优化目标
-	SecondaryOptimizationEvent                   string             `json:"secondary_optimization_event"`                      // 次要优化目标
+	SecondaryOptimizationEvent                   *string            `json:"secondary_optimization_event"`                      // 次要优化目标
 	MessageEventSetID                            string             `json:"message_event_set_id"`                              // 消息事件集的 ID
-	Frequency                                    int                `json:"frequency"`                                         // 频次
-	FrequencySchedule                            int                `json:"frequency_schedule"`                                // 频次天数
+	Frequency                                    *int               `json:"frequency"`                                         // 频次
+	FrequencySchedule                            *int               `json:"frequency_schedule"`                                // 频次天数
 	BidType                                      string             `json:"bid_type"`                                          // 竞价策略
 	BidPrice                                     float64            `json:"bid_price"`                                         // 出价
 	ConversionBidPrice                           float64            `json:"conversion_bid_price"`                              // oCPM转化出价
-	DeepBidType                                  string             `json:"deep_bid_type"`                                     // 深度事件出价类型
+	DeepBidType                                  *string            `json:"deep_bid_type"`                                     // 深度事件出价类型
 	RoasBid                                      float64            `json:"roas_bid"`                                          // ROAS 目标值
 	VboWindow                                    string             `json:"vbo_window"`                                        // 竞价策略的时间窗口期
 	BidDisplayMode                               string             `json:"bid_display_mode"`                                  // 每次浏览成本的计算和测算模式
 	DeepCpaBid                                   float64            `json:"deep_cpa_bid"`                                      // 深度事件出价价格
 	CpvVideoDuration                             string             `json:"cpv_video_duration"`                                // 视频播放时长
-	NextDayRetention                             float64            `json:"next_day_retention"`                                // 次日留存率
+	NextDayRetention                             *float64           `json:"next_day_retention"`                                // 次日留存率
 	ClickAttributionWindow                       string             `json:"click_attribution_window"`                          // 点击归因窗口期
 	EngagedViewAttributionWindow                 string             `json:"engaged_view_attribution_window"`                   // 深度互动观看归因窗口期
 	ViewAttributionWindow                        string             `json:"view_attribution_window"`                           // 展示归因窗口期
@@ -125,20 +125,25 @@ type AdGroup struct {
 	Pacing                                       string             `json:"pacing"`                                            // 广告投放速度类型
 	OperationStatus                              string             `json:"operation_status"`                                  // 广告组的操作状态
 	SecondaryStatus                              string             `json:"secondary_status"`                                  // 广告组状态（二级状态)
-	StatisticType                                string             `json:"statistic_type"`                                    // 转化事件出价统计类型
+	StatisticType                                *string            `json:"statistic_type"`                                    // 转化事件出价统计类型
 	IsHfss                                       bool               `json:"is_hfss"`                                           // 是否是 HFSS 食品
 	CreativeMaterialMode                         string             `json:"creative_material_mode"`                            // 创意投放方式
 	AdGroupAppProfilePageState                   string             `json:"adgroup_app_profile_page_state"`                    // 广告组是否使用了App中间页
-	FeedType                                     string             `json:"feed_type"`                                         // 信息流类型
-	RfPurchasedType                              string             `json:"rf_purchased_type"`                                 // 覆盖和频次广告购买方式
+	FeedType                                     *string            `json:"feed_type"`                                         // 信息流类型
+	RfPurchasedType                              *string            `json:"rf_purchased_type"`                                 // 覆盖和频次广告购买方式
 	PurchasedImpression                          int                `json:"purchased_impression"`                              // 覆盖和频次广告购买的展示量
-	PurchasedReach                               int                `json:"purchased_reach"`                                   // 覆盖和频次广告购买的触达人数
-	RfEstimatedCpr                               float64            `json:"rf_estimated_cpr"`                                  // 覆盖和频次广告预测的千人覆盖成本
-	RfEstimatedFrequency                         float64            `json:"rf_estimated_frequency"`                            // 覆盖和频次广告预测的人均展示频次
+	PurchasedReach                               *int               `json:"purchased_reach"`                                   // 覆盖和频次广告购买的触达人数
+	RfEstimatedCpr                               *float64           `json:"rf_estimated_cpr"`                                  // 覆盖和频次广告预测的千人覆盖成本
+	RfEstimatedFrequency                         *float64           `json:"rf_estimated_frequency"`                            // 覆盖和频次广告预测的人均展示频次
 	SplitTestGroupID                             string             `json:"split_test_group_id"`                               // 拆分对比测试组ID
 	SplitTestStatus                              string             `json:"split_test_status"`                                 // 拆分对比测试状态
 	IsNewStructure                               bool               `json:"is_new_structure"`                                  // 推广系列是否是新结构
 	SkipLearningPhase                            bool               `json:"skip_learning_phase"`                               // 是否跳过学习阶段
+	DeliveryMode                                 *string            `json:"delivery_mode"`                                     // 广告投放的排序与排期策略
+	Keywords                                     *string            `json:"keywords"`                                          // 关键字
+	Package                                      string             `json:"package"`                                           // 包名
+	CategoryID                                   string             `json:"category_id"`                                       // 分类ID
+	AdgroupAppProfilePageType                    string             `json:"adgroup_app_profile_page_type"`
 }
 
 // CustomAction 定义了自定义行为的数据结构

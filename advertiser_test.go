@@ -1,6 +1,7 @@
 package tba
 
 import (
+	"fmt"
 	"os"
 	"testing"
 )
@@ -19,5 +20,5 @@ func TestGetAdvertiserInfo(t *testing.T) {
 		t.Error(err.Error())
 		return
 	}
-	t.Log(res.Data)
+	fmt.Printf("%#+v\n", res.Data)
 }
