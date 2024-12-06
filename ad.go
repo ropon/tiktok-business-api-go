@@ -59,7 +59,7 @@ type Ad struct {
 	DisclaimerType             string                    `json:"disclaimer_type"`                // 免责声明类型，枚举值：TEXT_LINK（文字链免责声明），TEXT_ONLY（纯文本免责声明）。
 	DisclaimerText             *DisclaimerText           `json:"disclaimer_text"`                // 免责声明文本
 	DisclaimerClickableTexts   *DisclaimerClickableTexts `json:"disclaimer_clickable_texts"`     // 免责声明URL
-	TrackingPixelID            string                    `json:"tracking_pixel_id"`              // 正在监测的 Pixel ID
+	TrackingPixelID            int                       `json:"tracking_pixel_id"`              // 正在监测的 Pixel ID
 	TrackingAppID              string                    `json:"tracking_app_id"`                // 应用ID
 	TrackingOfflineEventSetIDs *[]string                 `json:"tracking_offline_event_set_ids"` // 线下事件组ID列表
 	TrackingMessageEventSetID  string                    `json:"tracking_message_event_set_id"`  // 即时通讯广告中监测的消息事件集的 ID。
