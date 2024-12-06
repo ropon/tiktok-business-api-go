@@ -20,5 +20,7 @@ func TestFindAdGroups(t *testing.T) {
 		t.Error(err.Error())
 		return
 	}
-	fmt.Printf("%#+v\n", res.Data.List[0])
+	fmt.Printf("%#+v\n", res.Data.List[0].IncludedPangleAudiencePackageIDs)
+	tmpA := res.Data.List[0].ContextualTagIDs
+	fmt.Printf("%#+v\n", len(*tmpA))
 }

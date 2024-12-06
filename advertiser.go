@@ -45,7 +45,7 @@ type AdvertiserInfo struct {
 	OwnerBcID               string                `json:"owner_bc_id,omitempty"`               // 广告账户所属的商务中心的 ID（注意：仅在特定条件下返回）
 	Status                  AdvertiserStatus      `json:"status,omitempty"`                    // 广告账号状态（枚举值详见枚举值-广告主状态）
 	Role                    AdvertiserRole        `json:"role,omitempty"`                      // 广告账号角色（枚举值详见枚举值-广告主角色）
-	RejectionReason         *string               `json:"rejection_reason,omitempty"`          // 审核拒绝原因
+	RejectionReason         string                `json:"rejection_reason,omitempty"`          // 审核拒绝原因
 	Name                    string                `json:"name,omitempty"`                      // 广告账号名称
 	Timezone                string                `json:"timezone,omitempty"`                  // 广告账号时区信息（如 "Etc/GMT"，"Europe/London"）
 	DisplayTimezone         string                `json:"display_timezone,omitempty"`          // 广告账号所在时区名称（如 "Europe/London"）
@@ -62,13 +62,13 @@ type AdvertiserInfo struct {
 	TelephoneNumber         string                `json:"telephone_number,omitempty"`          // 固定电话号码（已脱敏）
 	Language                string                `json:"language,omitempty"`                  // 广告账号所使用的语言代码
 	LicenseNo               string                `json:"license_no,omitempty"`                // 营业执照编号
-	LicenseUrl              *string               `json:"license_url,omitempty"`               // 营业执照预览 URL（1小时内有效）
-	LicenseProvince         *string               `json:"license_province,omitempty"`          // 营业执照的颁发省份（即将废弃）
-	LicenseCity             *string               `json:"license_city,omitempty"`              // 营业执照的颁发城市（即将废弃）
+	LicenseUrl              string                `json:"license_url,omitempty"`               // 营业执照预览 URL（1小时内有效）
+	LicenseProvince         string                `json:"license_province,omitempty"`          // 营业执照的颁发省份（即将废弃）
+	LicenseCity             string                `json:"license_city,omitempty"`              // 营业执照的颁发城市（即将废弃）
 	PromotionArea           string                `json:"promotion_area,omitempty"`            // 广告账户主要推广地域（即将废弃）
-	PromotionCenterProvince *string               `json:"promotion_center_province,omitempty"` // 广告账户主要推广省份（即将废弃）
-	PromotionCenterCity     *string               `json:"promotion_center_city,omitempty"`     // 广告账户主要推广城市（即将废弃）
-	Brand                   *string               `json:"brand,omitempty"`                     // 品牌名称（即将废弃）
+	PromotionCenterProvince string                `json:"promotion_center_province,omitempty"` // 广告账户主要推广省份（即将废弃）
+	PromotionCenterCity     string                `json:"promotion_center_city,omitempty"`     // 广告账户主要推广城市（即将废弃）
+	Brand                   string                `json:"brand,omitempty"`                     // 品牌名称（即将废弃）
 	Description             string                `json:"description,omitempty"`               // 品牌描述
 	Balance                 float64               `json:"balance,omitempty"`                   // 广告账户可用余额
 	CreateTime              UnixTime              `json:"create_time,omitempty"`               // 广告账号创建时间（Unix时间戳，单位秒）
