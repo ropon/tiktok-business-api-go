@@ -173,7 +173,7 @@ type AdGroupData struct {
 	PageInfo PageInfo  `json:"page_info"`
 }
 
-// AdGroupRequest 定义了广告组请求的参数结构
+// AdGroupFilter 定义了广告组请求的参数结构
 type AdGroupFilter struct {
 	CampaignIDs             []string `form:"campaign_ids"`               // 推广系列的id列表，支持筛选指定推广系列下的广告组，允许数量范围：1-100
 	CampaignSystemOrigins   []string `form:"campaign_system_origins"`    // 广告组所属的推广系列来源。枚举值：PROMOTE（内容加热推广系列），TT_ADS_PLATFORM（非内容加热推广系列）。默认值：["TT_ADS_PLATFORM"]
