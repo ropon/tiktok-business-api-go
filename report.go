@@ -136,21 +136,21 @@ type ReportFilter struct {
 
 type ReportListReq struct {
 	BaseReq
-	AdvertiserIDs           []string     `form:"advertiser_ids"`               // 广告主ID列表，条件必填，最大数量：5
-	BCID                    string       `form:"bc_id"`                        // 商务中心ID，条件必填
-	ServiceType             string       `form:"service_type"`                 // 广告服务类型，枚举值：AUCTION, RESERVATION
-	ReportType              string       `form:"report_type"`                  // 报表类型，必填，枚举值：BASIC, AUDIENCE, PLAYABLE_MATERIAL, CATALOG, BC, TT_SHOP
-	DataLevel               string       `form:"data_level"`                   // 报表数据层级，条件必填
-	Dimensions              []string     `form:"dimensions"`                   // 维度组合，必填
-	Metrics                 []string     `form:"metrics"`                      // 要查询的指标
-	EnableTotalMetrics      bool         `form:"enable_total_metrics"`         // 是否开启所请求指标的汇总数据
-	StartDate               string       `form:"start_date"`                   // 查询起始日期，条件必填，格式：YYYY-MM-DD
-	EndDate                 string       `form:"end_date"`                     // 查询结束日期，条件必填，格式：YYYY-MM-DD
-	QueryLifetime           bool         `form:"query_lifetime"`               // 是否请求Lifetime指标
-	MultiAdvReportInUTCTime bool         `form:"multi_adv_report_in_utc_time"` // 是否将返回的指标设置为UTC+0时区
-	OrderField              string       `form:"order_field"`                  // 排序字段
-	OrderType               string       `form:"order_type"`                   // 排序方式，枚举值：ASC, DESC
-	Filtering               ReportFilter `json:"filtering"`
+	AdvertiserIDs           []string       `form:"advertiser_ids"`               // 广告主ID列表，条件必填，最大数量：5
+	BCID                    string         `form:"bc_id"`                        // 商务中心ID，条件必填
+	ServiceType             string         `form:"service_type"`                 // 广告服务类型，枚举值：AUCTION, RESERVATION
+	ReportType              string         `form:"report_type"`                  // 报表类型，必填，枚举值：BASIC, AUDIENCE, PLAYABLE_MATERIAL, CATALOG, BC, TT_SHOP
+	DataLevel               string         `form:"data_level"`                   // 报表数据层级，条件必填
+	Dimensions              []string       `form:"dimensions"`                   // 维度组合，必填
+	Metrics                 []string       `form:"metrics"`                      // 要查询的指标
+	EnableTotalMetrics      bool           `form:"enable_total_metrics"`         // 是否开启所请求指标的汇总数据
+	StartDate               string         `form:"start_date"`                   // 查询起始日期，条件必填，格式：YYYY-MM-DD
+	EndDate                 string         `form:"end_date"`                     // 查询结束日期，条件必填，格式：YYYY-MM-DD
+	QueryLifetime           bool           `form:"query_lifetime"`               // 是否请求Lifetime指标
+	MultiAdvReportInUTCTime bool           `form:"multi_adv_report_in_utc_time"` // 是否将返回的指标设置为UTC+0时区
+	OrderField              string         `form:"order_field"`                  // 排序字段
+	OrderType               string         `form:"order_type"`                   // 排序方式，枚举值：ASC, DESC
+	Filtering               []ReportFilter `json:"filtering"`
 }
 
 type ReportListResp struct {

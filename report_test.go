@@ -23,6 +23,13 @@ func TestListReports(t *testing.T) {
 	req.Metrics = []string{"spend", "clicks", "impressions", "reach", "billed_cost"}
 	req.EnableTotalMetrics = true
 	req.PageSize = 100
+	req.Filtering = []ReportFilter{
+		{
+			FieldName:   "ad_ids",
+			FilterType:  FilterTypeIn,
+			FilterValue: "[11111]",
+		},
+	}
 	res, err := c.Report.ListReports(req)
 	if err != nil {
 		t.Error(err.Error())
