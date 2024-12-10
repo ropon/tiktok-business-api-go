@@ -27,6 +27,7 @@ type Client struct {
 	Campaign   *CampaignService
 	AdGroup    *AdGroupService
 	Ad         *AdService
+	Report     *ReportService
 }
 
 // service 服务
@@ -60,6 +61,7 @@ func NewClient(httpReq *requests.Request, accessToken ...string) *Client {
 	c.Campaign = (*CampaignService)(&c.common)
 	c.AdGroup = (*AdGroupService)(&c.common)
 	c.Ad = (*AdService)(&c.common)
+	c.Report = (*ReportService)(&c.common)
 	return c
 }
 
