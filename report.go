@@ -150,7 +150,7 @@ type ReportListReq struct {
 	MultiAdvReportInUTCTime bool           `form:"multi_adv_report_in_utc_time"` // 是否将返回的指标设置为UTC+0时区
 	OrderField              string         `form:"order_field"`                  // 排序字段
 	OrderType               string         `form:"order_type"`                   // 排序方式，枚举值：ASC, DESC
-	Filtering               []ReportFilter `json:"filtering"`
+	Filtering               []ReportFilter `form:"filtering"`
 }
 
 type ReportListResp struct {
