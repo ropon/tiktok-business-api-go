@@ -34,22 +34,22 @@ type Report struct {
 }
 
 type ReportDimensions struct {
-	AdvertiserID       string `json:"advertiser_id"`        // 广告主ID。当dimensions包含 advertiser_id 时返回
-	CampaignID         string `json:"campaign_id"`          // 推广系列ID。当dimensions包含 campaign_id 时返回
-	AdgroupID          string `json:"adgroup_id"`           // 广告组ID。当dimensions包含 adgroup_id 时返回
-	AdID               string `json:"ad_id"`                // 广告ID。当dimensions包含 ad_id 时返回
-	StatTimeDay        string `json:"stat_time_day"`        // 消耗发生的时间（天）。格式：2020-01-01 00:00:00
-	StatTimeHour       string `json:"stat_time_hour"`       // 消耗发生的时间（小时）。格式：2020-01-01 10:00:00
-	AC                 string `json:"ac"`                   // 受众网络类型。详见枚举值-广告管理-网络类型
-	Age                string `json:"age"`                  // 受众年龄区间。详见枚举值-广告管理-受众年龄区间
-	CountryCode        string `json:"country_code"`         // 受众国家或地区代码。详见附录-地区代码
-	InterestCategory   string `json:"interest_category"`    // 旧版一级兴趣分类（将在下个API版本中废弃）
-	InterestCategoryV2 string `json:"interest_category_v2"` // 新版一级兴趣分类。使用/tool/interest_category/接口获取完整列表
-	Gender             string `json:"gender"`               // 受众性别。枚举值: FEMALE，MALE，NONE
-	Language           string `json:"language"`             // 受众语言。详见枚举值-广告管理-受众语言
-	Placement          string `json:"placement"`            // 投放版位，详见枚举值-广告管理-版位
-	Platform           string `json:"platform"`             // 受众操作系统，详见枚举值-广告管理-受众操作系统
-	ContextualTag      string `json:"contextual_tag"`       // 内容相关定向标签
+	AdvertiserID       string   `json:"advertiser_id"`        // 广告主ID。当dimensions包含 advertiser_id 时返回
+	CampaignID         string   `json:"campaign_id"`          // 推广系列ID。当dimensions包含 campaign_id 时返回
+	AdgroupID          string   `json:"adgroup_id"`           // 广告组ID。当dimensions包含 adgroup_id 时返回
+	AdID               string   `json:"ad_id"`                // 广告ID。当dimensions包含 ad_id 时返回
+	StatTimeDay        DateTime `json:"stat_time_day"`        // 消耗发生的时间（天）。格式：2020-01-01 00:00:00
+	StatTimeHour       DateTime `json:"stat_time_hour"`       // 消耗发生的时间（小时）。格式：2020-01-01 10:00:00
+	AC                 string   `json:"ac"`                   // 受众网络类型。详见枚举值-广告管理-网络类型
+	Age                string   `json:"age"`                  // 受众年龄区间。详见枚举值-广告管理-受众年龄区间
+	CountryCode        string   `json:"country_code"`         // 受众国家或地区代码。详见附录-地区代码
+	InterestCategory   string   `json:"interest_category"`    // 旧版一级兴趣分类（将在下个API版本中废弃）
+	InterestCategoryV2 string   `json:"interest_category_v2"` // 新版一级兴趣分类。使用/tool/interest_category/接口获取完整列表
+	Gender             string   `json:"gender"`               // 受众性别。枚举值: FEMALE，MALE，NONE
+	Language           string   `json:"language"`             // 受众语言。详见枚举值-广告管理-受众语言
+	Placement          string   `json:"placement"`            // 投放版位，详见枚举值-广告管理-版位
+	Platform           string   `json:"platform"`             // 受众操作系统，详见枚举值-广告管理-受众操作系统
+	ContextualTag      string   `json:"contextual_tag"`       // 内容相关定向标签
 }
 
 type ReportMetrics struct {
