@@ -58,7 +58,6 @@ func addParamsToQueryRecursive(query url.Values, v reflect.Value) error {
 		}
 
 		// 根据字段类型和标签处理参数
-		fmt.Println(111, field.Kind(), jsonName)
 		switch {
 		case field.Kind() == reflect.Slice:
 			if !field.IsZero() {
