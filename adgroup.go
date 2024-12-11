@@ -175,28 +175,28 @@ type AdGroupData struct {
 
 // AdGroupFilter 定义了广告组请求的参数结构
 type AdGroupFilter struct {
-	CampaignIDs             []string `form:"campaign_ids"`               // 推广系列的id列表，支持筛选指定推广系列下的广告组，允许数量范围：1-100
-	CampaignSystemOrigins   []string `form:"campaign_system_origins"`    // 广告组所属的推广系列来源。枚举值：PROMOTE（内容加热推广系列），TT_ADS_PLATFORM（非内容加热推广系列）。默认值：["TT_ADS_PLATFORM"]
-	AdGroupIDs              []string `form:"adgroup_ids"`                // 广告组id列表，支持筛选指定的广告组，允许数量范围：1-100
-	AdGroupName             string   `form:"adgroup_name"`               // 广告组名字，支持广告组名字的模糊搜索
-	PrimaryStatus           string   `form:"primary_status"`             // 一级状态。枚举值详见枚举值 - 一级状态。默认值：STATUS_NOT_DELETE
-	SecondaryStatus         string   `form:"secondary_status"`           // 广告组二级状态。枚举值详见枚举值 - 二级状态 - 广告组状态
-	ObjectiveType           string   `form:"objective_type"`             // 推广目标。枚举值参见枚举值-推广目标
-	BuyingTypes             []string `form:"buying_types"`               // 购买类型。枚举值：AUCTION（竞价广告），RESERVATION_RF（合约覆盖和频次广告及TikTok Pulse广告），RESERVATION_TOP_VIEW（合约TopView广告）。默认值：["AUCTION", "RESERVATION_RF"]
-	OptimizationGoal        string   `form:"optimization_goal"`          // 优化目标。枚举值见枚举值-优化目标
-	PromotionType           string   `form:"promotion_type"`             // 推广对象类型（优化位置）。枚举值：APP（应用），WEBSITE（落地页），INSTANT_FORM（线索表单），LEAD_GEN_CLICK_TO_TT_DIRECT_MESSAGE（TikTok私信），LEAD_GEN_CLICK_TO_SOCIAL_MEDIA_APP_MESSAGE（社交媒体应用），LEAD_GEN_CLICK_TO_CALL（电话通话）
-	BidStrategy             string   `form:"bid_strategy"`               // 竞价策略。枚举值：BID_STRATEGY_COST_CAP, BID_STRATEGY_BID_CAP, BID_STRATEGY_MAX_CONVERSION, BID_STRATEGY_LOWEST_COST
-	CreativeMaterialMode    string   `form:"creative_material_mode"`     // 创意投放方式。枚举值: CUSTOM（自定义），DYNAMIC（程序化），SMART_CREATIVE（智能创意）
-	BillingEvents           []string `form:"billing_events"`             // 计费事件，按照计费事件筛选。枚举值详见枚举值-计费事件
-	CreationFilterStartTime string   `form:"creation_filter_start_time"` // 广告组最早创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
-	CreationFilterEndTime   string   `form:"creation_filter_end_time"`   // 广告组最晚创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
-	SplitTestEnabled        bool     `form:"split_test_enabled"`         // 是否启用了拆分对比测试筛选。true：仅获取已启用拆分对比测试的广告组，false：仅获取未启用拆分对比测试的广告组
+	CampaignIDs             []string `json:"campaign_ids,omitempty"`               // 推广系列的id列表，支持筛选指定推广系列下的广告组，允许数量范围：1-100
+	CampaignSystemOrigins   []string `json:"campaign_system_origins,omitempty"`    // 广告组所属的推广系列来源。枚举值：PROMOTE（内容加热推广系列），TT_ADS_PLATFORM（非内容加热推广系列）。默认值：["TT_ADS_PLATFORM"]
+	AdGroupIDs              []string `json:"adgroup_ids,omitempty"`                // 广告组id列表，支持筛选指定的广告组，允许数量范围：1-100
+	AdGroupName             string   `json:"adgroup_name,omitempty"`               // 广告组名字，支持广告组名字的模糊搜索
+	PrimaryStatus           string   `json:"primary_status,omitempty"`             // 一级状态。枚举值详见枚举值 - 一级状态。默认值：STATUS_NOT_DELETE
+	SecondaryStatus         string   `json:"secondary_status,omitempty"`           // 广告组二级状态。枚举值详见枚举值 - 二级状态 - 广告组状态
+	ObjectiveType           string   `json:"objective_type,omitempty"`             // 推广目标。枚举值参见枚举值-推广目标
+	BuyingTypes             []string `json:"buying_types,omitempty"`               // 购买类型。枚举值：AUCTION（竞价广告），RESERVATION_RF（合约覆盖和频次广告及TikTok Pulse广告），RESERVATION_TOP_VIEW（合约TopView广告）。默认值：["AUCTION", "RESERVATION_RF"]
+	OptimizationGoal        string   `json:"optimization_goal,omitempty"`          // 优化目标。枚举值见枚举值-优化目标
+	PromotionType           string   `json:"promotion_type,omitempty"`             // 推广对象类型（优化位置）。枚举值：APP（应用），WEBSITE（落地页），INSTANT_FORM（线索表单），LEAD_GEN_CLICK_TO_TT_DIRECT_MESSAGE（TikTok私信），LEAD_GEN_CLICK_TO_SOCIAL_MEDIA_APP_MESSAGE（社交媒体应用），LEAD_GEN_CLICK_TO_CALL（电话通话）
+	BidStrategy             string   `json:"bid_strategy,omitempty"`               // 竞价策略。枚举值：BID_STRATEGY_COST_CAP, BID_STRATEGY_BID_CAP, BID_STRATEGY_MAX_CONVERSION, BID_STRATEGY_LOWEST_COST
+	CreativeMaterialMode    string   `json:"creative_material_mode,omitempty"`     // 创意投放方式。枚举值: CUSTOM（自定义），DYNAMIC（程序化），SMART_CREATIVE（智能创意）
+	BillingEvents           []string `json:"billing_events,omitempty"`             // 计费事件，按照计费事件筛选。枚举值详见枚举值-计费事件
+	CreationFilterStartTime string   `json:"creation_filter_start_time,omitempty"` // 广告组最早创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
+	CreationFilterEndTime   string   `json:"creation_filter_end_time,omitempty"`   // 广告组最晚创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
+	SplitTestEnabled        bool     `json:"split_test_enabled,omitempty"`         // 是否启用了拆分对比测试筛选。true：仅获取已启用拆分对比测试的广告组，false：仅获取未启用拆分对比测试的广告组
 }
 
 // AdGroupListReq 定义了广告组列表请求的参数结构
 type AdGroupListReq struct {
 	BaseReq
-	Filtering AdGroupFilter `json:"filtering"`
+	Filtering AdGroupFilter `json:"filtering,omitempty"`
 }
 
 // AdGroupListResp 定义了广告组列表响应的结构
@@ -209,7 +209,7 @@ type AdGroupListResp struct {
 func (s *AdGroupService) FindAdGroups(query *AdGroupListReq) (*AdGroupListResp, error) {
 	apiUrl := "adgroup/get/"
 	resp := new(AdGroupListResp)
-	err := s.client.get(apiUrl, resp, structPtr2Map(query, "form"))
+	err := s.client.get(apiUrl, resp, query)
 	if err != nil {
 		return nil, err
 	}

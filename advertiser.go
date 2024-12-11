@@ -81,8 +81,8 @@ type AdvertiserData struct {
 
 // AdvertiserReq 定义获取广告主详细信息的请求结构
 type AdvertiserReq struct {
-	AdvertiserIDs []string `form:"advertiser_ids"` // 需要查看详细信息的广告主 ID 列表
-	Fields        []string `form:"fields"`         // 需要获取的字段
+	AdvertiserIDs []string `json:"advertiser_ids,omitempty"` // 需要查看详细信息的广告主 ID 列表
+	Fields        []string `json:"fields,omitempty"`         // 需要获取的字段
 }
 
 // AdvertiserResp 获取广告主信息响应
@@ -95,7 +95,7 @@ type AdvertiserResp struct {
 func (s *AdvertiserService) GetAdvertiserInfo(query *AdvertiserReq) (*AdvertiserResp, error) {
 	apiUrl := "advertiser/info/"
 	resp := new(AdvertiserResp)
-	err := s.client.get(apiUrl, resp, structPtr2Map(query, "form"))
+	err := s.client.get(apiUrl, resp, query)
 	if err != nil {
 		return nil, err
 	}

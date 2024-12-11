@@ -9,8 +9,6 @@ import (
 // go test -v -run TestGetUserInfo
 func TestGetUserInfo(t *testing.T) {
 	t.Parallel()
-	//httpReq := NewTokenConfig("", "").Client(os.Getenv("TikTokAccessToken"))
-	//httpReq.SetProxy("http://127.0.0.1:7892")
 
 	c := NewClient(nil, os.Getenv("TikTokAccessToken"))
 	c.SetHTTPProxy("http://127.0.0.1:7892")
@@ -21,5 +19,4 @@ func TestGetUserInfo(t *testing.T) {
 		return
 	}
 	fmt.Printf("%#+v\n", res.Data)
-
 }

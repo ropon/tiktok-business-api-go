@@ -111,25 +111,25 @@ type AdData struct {
 }
 
 type AdFilter struct {
-	CampaignIDs             []string `form:"campaign_ids"`
-	CampaignSystemOrigins   []string `form:"campaign_system_origins"`
-	AdgroupIDs              []string `form:"adgroup_ids"`
-	AdIDs                   []string `form:"ad_ids"`
-	PrimaryStatus           string   `form:"primary_status"`
-	SecondaryStatus         string   `form:"secondary_status"`
-	ObjectiveType           string   `form:"objective_type"`
-	BuyingTypes             []string `form:"buying_types"`
-	OptimizationGoal        string   `form:"optimization_goal"`
-	CreativeMaterialMode    string   `form:"creative_material_mode"`
-	Destination             string   `form:"destination"`
-	CreationFilterStartTime string   `form:"creation_filter_start_time"`
-	CreationFilterEndTime   string   `form:"creation_filter_end_time"`
+	CampaignIDs             []string `json:"campaign_ids,omitempty"`
+	CampaignSystemOrigins   []string `json:"campaign_system_origins,omitempty"`
+	AdgroupIDs              []string `json:"adgroup_ids,omitempty"`
+	AdIDs                   []string `json:"ad_ids,omitempty"`
+	PrimaryStatus           string   `json:"primary_status,omitempty"`
+	SecondaryStatus         string   `json:"secondary_status,omitempty"`
+	ObjectiveType           string   `json:"objective_type,omitempty"`
+	BuyingTypes             []string `json:"buying_types,omitempty"`
+	OptimizationGoal        string   `json:"optimization_goal,omitempty"`
+	CreativeMaterialMode    string   `json:"creative_material_mode,omitempty"`
+	Destination             string   `json:"destination,omitempty"`
+	CreationFilterStartTime string   `json:"creation_filter_start_time,omitempty"`
+	CreationFilterEndTime   string   `json:"creation_filter_end_time,omitempty"`
 }
 
 // AdListReq 定义了广告列表请求的参数结构
 type AdListReq struct {
 	BaseReq
-	Filtering AdFilter `json:"filtering"`
+	Filtering AdFilter `json:"filtering,omitempty"`
 }
 
 // AdListResp 定义了广告列表响应的结构
@@ -142,7 +142,7 @@ type AdListResp struct {
 func (s *AdService) FindAds(query *AdListReq) (*AdListResp, error) {
 	apiUrl := "ad/get/"
 	resp := new(AdListResp)
-	err := s.client.get(apiUrl, resp, structPtr2Map(query, "form"))
+	err := s.client.get(apiUrl, resp, query)
 	if err != nil {
 		return nil, err
 	}

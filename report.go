@@ -129,28 +129,28 @@ type ReportData struct {
 }
 
 type ReportFilter struct {
-	FieldName   string `form:"field_name"`   // 筛选字段名称，条件必填
-	FilterType  string `form:"filter_type"`  // 筛选类型，条件必填
-	FilterValue string `form:"filter_value"` // 要筛选的值，条件必填
+	FieldName   string `json:"field_name,omitempty"`   // 筛选字段名称，条件必填
+	FilterType  string `json:"filter_type,omitempty"`  // 筛选类型，条件必填
+	FilterValue string `json:"filter_value,omitempty"` // 要筛选的值，条件必填
 }
 
 type ReportListReq struct {
 	BaseReq
-	AdvertiserIDs           []string       `form:"advertiser_ids"`               // 广告主ID列表，条件必填，最大数量：5
-	BCID                    string         `form:"bc_id"`                        // 商务中心ID，条件必填
-	ServiceType             string         `form:"service_type"`                 // 广告服务类型，枚举值：AUCTION, RESERVATION
-	ReportType              string         `form:"report_type"`                  // 报表类型，必填，枚举值：BASIC, AUDIENCE, PLAYABLE_MATERIAL, CATALOG, BC, TT_SHOP
-	DataLevel               string         `form:"data_level"`                   // 报表数据层级，条件必填
-	Dimensions              []string       `form:"dimensions"`                   // 维度组合，必填
-	Metrics                 []string       `form:"metrics"`                      // 要查询的指标
-	EnableTotalMetrics      bool           `form:"enable_total_metrics"`         // 是否开启所请求指标的汇总数据
-	StartDate               string         `form:"start_date"`                   // 查询起始日期，条件必填，格式：YYYY-MM-DD
-	EndDate                 string         `form:"end_date"`                     // 查询结束日期，条件必填，格式：YYYY-MM-DD
-	QueryLifetime           bool           `form:"query_lifetime"`               // 是否请求Lifetime指标
-	MultiAdvReportInUTCTime bool           `form:"multi_adv_report_in_utc_time"` // 是否将返回的指标设置为UTC+0时区
-	OrderField              string         `form:"order_field"`                  // 排序字段
-	OrderType               string         `form:"order_type"`                   // 排序方式，枚举值：ASC, DESC
-	Filtering               []ReportFilter `form:"filtering"`
+	AdvertiserIDs           []string       `json:"advertiser_ids,omitempty"`               // 广告主ID列表，条件必填，最大数量：5
+	BCID                    string         `json:"bc_id,omitempty"`                        // 商务中心ID，条件必填
+	ServiceType             string         `json:"service_type,omitempty"`                 // 广告服务类型，枚举值：AUCTION, RESERVATION
+	ReportType              string         `json:"report_type,omitempty"`                  // 报表类型，必填，枚举值：BASIC, AUDIENCE, PLAYABLE_MATERIAL, CATALOG, BC, TT_SHOP
+	DataLevel               string         `json:"data_level,omitempty"`                   // 报表数据层级，条件必填
+	Dimensions              []string       `json:"dimensions,omitempty"`                   // 维度组合，必填
+	Metrics                 []string       `json:"metrics,omitempty"`                      // 要查询的指标
+	EnableTotalMetrics      bool           `json:"enable_total_metrics,omitempty"`         // 是否开启所请求指标的汇总数据
+	StartDate               string         `json:"start_date,omitempty"`                   // 查询起始日期，条件必填，格式：YYYY-MM-DD
+	EndDate                 string         `json:"end_date,omitempty"`                     // 查询结束日期，条件必填，格式：YYYY-MM-DD
+	QueryLifetime           bool           `json:"query_lifetime,omitempty"`               // 是否请求Lifetime指标
+	MultiAdvReportInUTCTime bool           `json:"multi_adv_report_in_utc_time,omitempty"` // 是否将返回的指标设置为UTC+0时区
+	OrderField              string         `json:"order_field,omitempty"`                  // 排序字段
+	OrderType               string         `json:"order_type,omitempty"`                   // 排序方式，枚举值：ASC, DESC
+	Filtering               []ReportFilter `json:"filtering,omitempty"`
 }
 
 type ReportListResp struct {
@@ -162,7 +162,7 @@ type ReportListResp struct {
 func (s *ReportService) ListReports(query *ReportListReq) (*ReportListResp, error) {
 	apiUrl := "report/integrated/get/"
 	resp := new(ReportListResp)
-	err := s.client.get(apiUrl, resp, structPtr2Map(query, "form"))
+	err := s.client.get(apiUrl, resp, query)
 	if err != nil {
 		return nil, err
 	}

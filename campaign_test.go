@@ -15,10 +15,18 @@ func TestFindCampaigns(t *testing.T) {
 	c.SetHTTPDebug(true)
 	req := new(CampaignListReq)
 	req.AdvertiserID = os.Getenv("TikTokAdvertiserID")
+
+	//req.Filtering = CampaignFilter{
+	//	CampaignIDs: []string{""},
+	//}
+
+	req.Filtering = CampaignFilter{
+		CreationFilterStartTime: "",
+	}
 	res, err := c.Campaign.FindCampaigns(req)
 	if err != nil {
 		t.Error(err.Error())
 		return
 	}
-	fmt.Printf("%#+v\n", res.Data.List[0])
+	fmt.Printf("%#+v\n", res.Data.List)
 }

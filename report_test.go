@@ -25,9 +25,14 @@ func TestListReports(t *testing.T) {
 	req.PageSize = 100
 	req.Filtering = []ReportFilter{
 		{
+			FieldName:   "campaign_ids",
+			FilterType:  FilterTypeIn,
+			FilterValue: "[]",
+		},
+		{
 			FieldName:   "ad_ids",
 			FilterType:  FilterTypeIn,
-			FilterValue: "[11111]",
+			FilterValue: "[]",
 		},
 	}
 	res, err := c.Report.ListReports(req)
@@ -37,5 +42,5 @@ func TestListReports(t *testing.T) {
 	}
 	fmt.Printf("total: %#+v\n", res.Data.TotalMetrics)
 	fmt.Println("=====")
-	fmt.Printf("repot: %#+v\n", res.Data.List[0])
+	fmt.Printf("repot: %#+v\n", res.Data.List)
 }

@@ -15,12 +15,16 @@ func TestFindAds(t *testing.T) {
 	c.SetHTTPDebug(true)
 	req := new(AdListReq)
 	req.AdvertiserID = os.Getenv("TikTokAdvertiserID")
+	//req.Filtering = AdFilter{
+	//	AdIDs: []string{""},
+	//}
+
 	res, err := c.Ad.FindAds(req)
 	if err != nil {
 		t.Error(err.Error())
 		return
 	}
-	fmt.Printf("%#+v\n", res.Data.List[0].TrackingOfflineEventSetIDs)
-	tmpA := res.Data.List[0].ImageIDs
-	fmt.Printf("%#+v\n", len(*tmpA))
+	fmt.Printf("%#+v\n", res.Data.List)
+	//tmpA := res.Data.List[0].ImageIDs
+	//fmt.Printf("%#+v\n", len(*tmpA))
 }

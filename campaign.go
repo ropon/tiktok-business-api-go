@@ -169,20 +169,20 @@ type PageInfo struct {
 
 // CampaignFilter 推广系列过滤条件
 type CampaignFilter struct {
-	ObjectiveType              ObjectiveType          `json:"objective_type"`                // 推广目标，例如："APP_PROMOTION"
-	CampaignIDs                []string               `json:"campaign_ids"`                  // 推广系列 ID，允许数量范围: 1-100
-	CampaignName               string                 `json:"campaign_name"`                 // 推广系列名称，支持模糊匹配
-	CampaignSystemOrigins      []CampaignSystemOrigin `json:"campaign_system_origins"`       // 推广系列来源，枚举值：PROMOTE, TT_ADS_PLATFORM
-	CampaignType               CampaignType           `json:"campaign_type"`                 // 推广系列类型，枚举值: REGULAR_CAMPAIGN, IOS14_CAMPAIGN
-	BuyingTypes                []BuyingType           `json:"buying_types"`                  // 购买类型，枚举值：AUCTION, RESERVATION_RF, RESERVATION_TOP_VIEW
-	PrimaryStatus              string                 `json:"primary_status"`                // 一级状态
-	SecondaryStatus            string                 `json:"secondary_status"`              // 推广系列二级状态
-	CreationFilterStartTime    string                 `json:"creation_filter_start_time"`    // 推广系列最早创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
-	CreationFilterEndTime      string                 `json:"creation_filter_end_time"`      // 推广系列最晚创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
-	IsSmartPerformanceCampaign bool                   `json:"is_smart_performance_campaign"` // 是否为自动化类型的推广系列
-	SplitTestEnabled           bool                   `json:"split_test_enabled"`            // 推广系列是否启用了拆分对比测试
-	CampaignProductSource      string                 `json:"campaign_product_source"`       // 推广系列的商品来源，枚举值：CATALOG, STORE
-	OptimizationGoal           string                 `json:"optimization_goal"`             // 优化目标
+	ObjectiveType              ObjectiveType          `json:"objective_type,omitempty"`                // 推广目标，例如："APP_PROMOTION"
+	CampaignIDs                []string               `json:"campaign_ids,omitempty"`                  // 推广系列 ID，允许数量范围: 1-100
+	CampaignName               string                 `json:"campaign_name,omitempty"`                 // 推广系列名称，支持模糊匹配
+	CampaignSystemOrigins      []CampaignSystemOrigin `json:"campaign_system_origins,omitempty"`       // 推广系列来源，枚举值：PROMOTE, TT_ADS_PLATFORM
+	CampaignType               CampaignType           `json:"campaign_type,omitempty"`                 // 推广系列类型，枚举值: REGULAR_CAMPAIGN, IOS14_CAMPAIGN
+	BuyingTypes                []BuyingType           `json:"buying_types,omitempty"`                  // 购买类型，枚举值：AUCTION, RESERVATION_RF, RESERVATION_TOP_VIEW
+	PrimaryStatus              string                 `json:"primary_status,omitempty"`                // 一级状态
+	SecondaryStatus            string                 `json:"secondary_status,omitempty"`              // 推广系列二级状态
+	CreationFilterStartTime    string                 `json:"creation_filter_start_time,omitempty"`    // 推广系列最早创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
+	CreationFilterEndTime      string                 `json:"creation_filter_end_time,omitempty"`      // 推广系列最晚创建时间，格式：YYYY-MM-DD HH:MM:SS（UTC时区）
+	IsSmartPerformanceCampaign bool                   `json:"is_smart_performance_campaign,omitempty"` // 是否为自动化类型的推广系列
+	SplitTestEnabled           bool                   `json:"split_test_enabled,omitempty"`            // 推广系列是否启用了拆分对比测试
+	CampaignProductSource      string                 `json:"campaign_product_source,omitempty"`       // 推广系列的商品来源，枚举值：CATALOG, STORE
+	OptimizationGoal           string                 `json:"optimization_goal,omitempty"`             // 优化目标
 }
 
 // CampaignData 推广系列数据
@@ -193,17 +193,17 @@ type CampaignData struct {
 
 // BaseReq 基础请求参数
 type BaseReq struct {
-	AdvertiserID                string   `form:"advertiser_id"`
-	Fields                      []string `form:"fields"`
-	ExcludeFieldTypesInResponse []string `form:"exclude_field_types_in_response"`
-	Page                        int64    `form:"page,default=1"`
-	PageSize                    int64    `form:"page_size,default=10"`
+	AdvertiserID                string   `json:"advertiser_id,omitempty"`
+	Fields                      []string `json:"fields,omitempty"`
+	ExcludeFieldTypesInResponse []string `json:"exclude_field_types_in_response,omitempty"`
+	Page                        int64    `json:"page,omitempty" param:"default=1"`
+	PageSize                    int64    `json:"page_size,omitempty" param:"default=10"`
 }
 
 // CampaignListReq 获取推广系列列表请求参数
 type CampaignListReq struct {
 	BaseReq
-	Filtering CampaignFilter `form:"filtering"`
+	Filtering CampaignFilter `json:"filtering,omitempty"`
 }
 
 // CampaignListResp 获取推广系列列表响应参数
@@ -216,7 +216,7 @@ type CampaignListResp struct {
 func (s *CampaignService) FindCampaigns(query *CampaignListReq) (*CampaignListResp, error) {
 	apiUrl := "campaign/get/"
 	resp := new(CampaignListResp)
-	err := s.client.get(apiUrl, resp, structPtr2Map(query, "form"))
+	err := s.client.get(apiUrl, resp, query)
 	if err != nil {
 		return nil, err
 	}
