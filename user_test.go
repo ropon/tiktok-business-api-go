@@ -12,6 +12,7 @@ func TestGetUserInfo(t *testing.T) {
 
 	c := NewClient(nil, os.Getenv("TikTokAccessToken"))
 	c.SetHTTPProxy("http://127.0.0.1:7892")
+	c.SetHTTPDebug(true)
 
 	res, err := c.User.GetUserInfo()
 	if err != nil {
