@@ -15,7 +15,9 @@ func TestNewTokenConfig(t *testing.T) {
 	assert.Equal(t, "a", auth.AppID)
 
 	auth2 := NewTokenConfig(os.Getenv("TikTokAppID"), os.Getenv("TikTokSecret"))
-	auth2.SetHTTPProxy("http://127.0.0.1:7892")
+	if os.Getenv("https_proxy") != "" {
+		auth2.SetHTTPProxy(os.Getenv("https_proxy"))
+	}
 	res, err := auth2.ExchangeAccessToken("")
 	if err != nil {
 		t.Error(err.Error())

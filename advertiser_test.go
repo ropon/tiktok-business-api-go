@@ -11,7 +11,9 @@ func TestGetAdvertiserInfo(t *testing.T) {
 	t.Parallel()
 
 	c := NewClient(nil, os.Getenv("TikTokAccessToken"))
-	c.SetHTTPProxy("http://127.0.0.1:7892")
+	if os.Getenv("https_proxy") != "" {
+		c.SetHTTPProxy(os.Getenv("https_proxy"))
+	}
 	c.SetHTTPDebug(true)
 
 	res, err := c.Advertiser.GetAdvertiserInfo(&AdvertiserReq{
