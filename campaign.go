@@ -43,6 +43,7 @@ type OperationStatus string
 const (
 	OperationStatusEnable  OperationStatus = "ENABLE"  // 推广系列处于启用（"开"）状态
 	OperationStatusDisable OperationStatus = "DISABLE" // 推广系列处于未启用（"关"）状态
+	OperationStatusDelete  OperationStatus = "DELETE"  // 推广系列处于删除状态
 )
 
 // Objective 推广类型
@@ -126,37 +127,37 @@ const (
 
 // Campaign 结构体包含广告系列的详细信息
 type Campaign struct {
-	AdvertiserID                string                      `json:"advertiser_id"`                   // 广告主 ID
-	CampaignID                  string                      `json:"campaign_id"`                     // 推广系列 ID
-	CampaignSystemOrigin        CampaignSystemOrigin        `json:"campaign_system_origin"`          // 推广系列来源
-	IsSearchCampaign            bool                        `json:"is_search_campaign"`              // 是否为搜索推广系列
-	IsSmartPerformanceCampaign  bool                        `json:"is_smart_performance_campaign"`   // 是否为自动化类型的推广系列
-	CampaignName                string                      `json:"campaign_name"`                   // 推广系列名称
-	CampaignType                CampaignType                `json:"campaign_type"`                   // 推广系列类型
-	PostbackWindowMode          PostbackWindowMode          `json:"postback_window_mode"`            // SKAN 4.0 回传模式
-	AppID                       string                      `json:"app_id"`                          // 推广的App的ID
-	Budget                      float64                     `json:"budget"`                          // 推广系列预算
-	BudgetMode                  BudgetMode                  `json:"budget_mode"`                     // 预算类型
-	RtaID                       string                      `json:"rta_id"`                          // 实时 API ID
-	RtaProductSelectionEnabled  bool                        `json:"rta_product_selection_enabled"`   // 是否使用实时 API 自动选择商品
-	SecondaryStatus             string                      `json:"secondary_status"`                // 推广系列状态（二级状态）
-	OperationStatus             OperationStatus             `json:"operation_status"`                // 推广系列的操作状态
-	Objective                   Objective                   `json:"objective"`                       // 推广类型
-	ObjectiveType               string                      `json:"objective_type"`                  // 推广目标
-	AppPromotionType            AppPromotionType            `json:"app_promotion_type"`              // 应用推广类型
-	CampaignProductSource       CampaignProductSource       `json:"campaign_product_source"`         // 推广系列的商品来源
-	BudgetOptimizeOn            bool                        `json:"budget_optimize_on"`              // 是否开启推广系列预算优化
-	BidType                     string                      `json:"bid_type"`                        // 推广系列层级的竞价策略
-	DeepBidType                 string                      `json:"deep_bid_type"`                   // 深度事件出价类型
-	RoasBid                     float64                     `json:"roas_bid,omitempty"`              // 用于价值优化的ROAS目标值
-	OptimizationGoal            string                      `json:"optimization_goal"`               // 优化目标
-	IsNewStructure              bool                        `json:"is_new_structure"`                // 是否为新结构
-	CreateTime                  DateTime                    `json:"create_time"`                     // 推广系列创建时间
-	ModifyTime                  DateTime                    `json:"modify_time"`                     // 推广系列修改时间
-	IsAdvancedDedicatedCampaign bool                        `json:"is_advanced_dedicated_campaign"`  // 是否为高级专属推广系列
-	CampaignAppProfilePageState CampaignAppProfilePageState `json:"campaign_app_profile_page_state"` // 下载中间页使用情况
-	SpecialIndustries           *[]SpecialIndustry          `json:"special_industries"`              // 特殊广告分类
-	RFCampaignType              RFCampaignType              `json:"rf_campaign_type"`                // 合约推广系列类型
+	AdvertiserID                string                      `json:"advertiser_id,omitempty"`                   // 广告主 ID
+	CampaignID                  string                      `json:"campaign_id,omitempty"`                     // 推广系列 ID
+	CampaignSystemOrigin        CampaignSystemOrigin        `json:"campaign_system_origin,omitempty"`          // 推广系列来源
+	IsSearchCampaign            bool                        `json:"is_search_campaign,omitempty"`              // 是否为搜索推广系列
+	IsSmartPerformanceCampaign  bool                        `json:"is_smart_performance_campaign,omitempty"`   // 是否为自动化类型的推广系列
+	CampaignName                string                      `json:"campaign_name,omitempty"`                   // 推广系列名称
+	CampaignType                CampaignType                `json:"campaign_type,omitempty"`                   // 推广系列类型
+	PostbackWindowMode          PostbackWindowMode          `json:"postback_window_mode,omitempty"`            // SKAN 4.0 回传模式
+	AppID                       string                      `json:"app_id,omitempty"`                          // 推广的App的ID
+	Budget                      float64                     `json:"budget,omitempty"`                          // 推广系列预算
+	BudgetMode                  BudgetMode                  `json:"budget_mode,omitempty"`                     // 预算类型
+	RtaID                       string                      `json:"rta_id,omitempty"`                          // 实时 API ID
+	RtaProductSelectionEnabled  bool                        `json:"rta_product_selection_enabled,omitempty"`   // 是否使用实时 API 自动选择商品
+	SecondaryStatus             string                      `json:"secondary_status,omitempty"`                // 推广系列状态（二级状态）
+	OperationStatus             OperationStatus             `json:"operation_status,omitempty"`                // 推广系列的操作状态
+	Objective                   Objective                   `json:"objective,omitempty"`                       // 推广类型
+	ObjectiveType               ObjectiveType               `json:"objective_type,omitempty"`                  // 推广目标
+	AppPromotionType            AppPromotionType            `json:"app_promotion_type,omitempty"`              // 应用推广类型
+	CampaignProductSource       CampaignProductSource       `json:"campaign_product_source,omitempty"`         // 推广系列的商品来源
+	BudgetOptimizeOn            bool                        `json:"budget_optimize_on,omitempty"`              // 是否开启推广系列预算优化
+	BidType                     string                      `json:"bid_type,omitempty"`                        // 推广系列层级的竞价策略
+	DeepBidType                 string                      `json:"deep_bid_type,omitempty"`                   // 深度事件出价类型
+	RoasBid                     float64                     `json:"roas_bid,omitempty"`                        // 用于价值优化的ROAS目标值
+	OptimizationGoal            string                      `json:"optimization_goal,omitempty"`               // 优化目标
+	IsNewStructure              bool                        `json:"is_new_structure,omitempty"`                // 是否为新结构
+	CreateTime                  DateTime                    `json:"create_time,omitempty"`                     // 推广系列创建时间
+	ModifyTime                  DateTime                    `json:"modify_time,omitempty"`                     // 推广系列修改时间
+	IsAdvancedDedicatedCampaign bool                        `json:"is_advanced_dedicated_campaign,omitempty"`  // 是否为高级专属推广系列
+	CampaignAppProfilePageState CampaignAppProfilePageState `json:"campaign_app_profile_page_state,omitempty"` // 下载中间页使用情况
+	SpecialIndustries           *[]SpecialIndustry          `json:"special_industries,omitempty"`              // 特殊广告分类
+	RFCampaignType              RFCampaignType              `json:"rf_campaign_type,omitempty"`                // 合约推广系列类型
 }
 
 // PageInfo 定义分页信息
@@ -206,10 +207,46 @@ type CampaignListReq struct {
 	Filtering CampaignFilter `json:"filtering,omitempty"`
 }
 
+// UpdateCampaignReq 更新推广系列请求参数
+type UpdateCampaignReq struct {
+	AdvertiserID      string             `json:"advertiser_id,omitempty"`      // 广告主 ID
+	CampaignID        string             `json:"campaign_id,omitempty"`        // 推广系列 ID
+	CampaignName      string             `json:"campaign_name,omitempty"`      // 推广系列名称
+	SpecialIndustries *[]SpecialIndustry `json:"special_industries,omitempty"` // 特殊广告分类
+	Budget            float64            `json:"budget,omitempty"`             // 推广系列预算
+}
+
+// UpdateCampaignStatusReq 更新推广系列状态请求参数
+type UpdateCampaignStatusReq struct {
+	AdvertiserID       string             `json:"advertiser_id,omitempty"`        // 广告主 ID
+	CampaignIDs        []string           `json:"campaign_ids,omitempty"`         // 推广系列 ID列表
+	OperationStatus    OperationStatus    `json:"operation_status,omitempty"`     // 推广系列的操作状态
+	PostbackWindowMode PostbackWindowMode `json:"postback_window_mode,omitempty"` // SKAN 4.0 回传模式
+}
+
 // CampaignListResp 获取推广系列列表响应参数
 type CampaignListResp struct {
 	BaseResp
 	Data CampaignData `json:"data"`
+}
+
+// CampaignResp 获取推广系列响应参数
+type CampaignResp struct {
+	BaseResp
+	Data Campaign `json:"data"`
+}
+
+// CampaignStatusData 推广系列状态数据
+type CampaignStatusData struct {
+	CampaignIDs  []string        `json:"campaign_ids"`
+	Status       OperationStatus `json:"status"`
+	CampaignList []Campaign      `json:"campaign_list"`
+}
+
+// CampaignStatusResp 更新推广系列状态响应参数
+type CampaignStatusResp struct {
+	BaseResp
+	Data CampaignStatusData `json:"data"`
 }
 
 // FindCampaigns 获取推广系列列表 https://business-api.tiktok.com/portal/docs?id=1739665513181185
@@ -217,6 +254,39 @@ func (s *CampaignService) FindCampaigns(query *CampaignListReq) (*CampaignListRe
 	apiUrl := "campaign/get/"
 	resp := new(CampaignListResp)
 	err := s.client.get(apiUrl, resp, query)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+// CreateCampaign 创建推广系列 https://business-api.tiktok.com/portal/docs?id=1739318962329602
+func (s *CampaignService) CreateCampaign(data *Campaign) (*CampaignResp, error) {
+	apiUrl := "campaign/create/"
+	resp := new(CampaignResp)
+	err := s.client.post(apiUrl, resp, data)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+// UpdateCampaign 更新推广系列 https://business-api.tiktok.com/portal/docs?id=1739320422086657
+func (s *CampaignService) UpdateCampaign(data *UpdateCampaignReq) (*CampaignResp, error) {
+	apiUrl := "campaign/update/"
+	resp := new(CampaignResp)
+	err := s.client.post(apiUrl, resp, data)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+// UpdateCampaignStatus 更新推广系列操作状态 https://business-api.tiktok.com/portal/docs?id=1739320994354178
+func (s *CampaignService) UpdateCampaignStatus(data *UpdateCampaignStatusReq) (*CampaignStatusResp, error) {
+	apiUrl := "campaign/status/update/"
+	resp := new(CampaignStatusResp)
+	err := s.client.post(apiUrl, resp, data)
 	if err != nil {
 		return nil, err
 	}

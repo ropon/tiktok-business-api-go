@@ -1,6 +1,7 @@
 package tba
 
 import (
+	"encoding/json"
 	"errors"
 	"net/url"
 	"time"
@@ -117,6 +118,18 @@ func (c *Client) get(apiUrl string, resp interface{}, params ...interface{}) err
 
 // post 处理post请求
 func (c *Client) post(url string, resp interface{}, data ...interface{}) error {
+	if len(data) > 0 {
+		postData := data[0]
+		bS, err := json.Marshal(postData)
+		if err != nil {
+			return err
+		}
+		res, err := c.client.Post(url, string(bS))
+		if err != nil {
+			return err
+		}
+		return c.rawJson(res, resp)
+	}
 	res, err := c.client.Post(url, data...)
 	if err != nil {
 		return err
